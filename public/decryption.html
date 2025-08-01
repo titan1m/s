@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decryption | Secure Data Processing System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a237e;
+            --secondary: #0d47a1;
+            --accent: #4fc3f7;
+            --light: #e3f2fd;
+            --dark: #0a1128;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 20px 0;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .back-btn {
+            color: var(--light);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .back-btn:hover {
+            color: var(--accent);
+        }
+        
+        .page-title {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .page-title h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+        
+        .page-title p {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .input-area {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .input-area h3 {
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+        
+        .text-input {
+            width: 100%;
+            min-height: 150px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            padding: 15px;
+            color: var(--light);
+            font-size: 16px;
+            resize: vertical;
+            margin-bottom: 20px;
+        }
+        
+        .upload-area {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+        
+        .upload-area:hover {
+            border-color: var(--accent);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .upload-area i {
+            font-size: 40px;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+        
+        .upload-area p {
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 15px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .options {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .options h3 {
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+        
+        .radio-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .radio-option {
+            flex: 1 1 200px;
+        }
+        
+        .radio-option input {
+            display: none;
+        }
+        
+        .radio-option label {
+            display: block;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .radio-option input:checked + label {
+            background: var(--accent);
+            color: var(--dark);
+            font-weight: 600;
+            border-color: var(--accent);
+        }
+        
+        .key-input {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            color: var(--light);
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        
+        .key-input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+        
+        .action-btn {
+            text-align: center;
+        }
+        
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 30px 0;
+            margin-top: 60px;
+        }
+        
+        .footer-nav {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-nav a {
+            color: var(--light);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-nav a:hover {
+            color: var(--accent);
+        }
+        
+        .copyright {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="encryption.html" class="back-btn">
+                    <i class="fas fa-arrow-left"></i> Back
+                </a>
+                <div class="logo">SecureData</div>
+                <div></div> <!-- spacer -->
+            </nav>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="page-title">
+            <h1><i class="fas fa-unlock"></i> Decrypt Your Data</h1>
+            <p>Access your encrypted data with the right key</p>
+        </div>
+        
+        <div class="input-area">
+            <h3><i class="fas fa-pencil-alt"></i> Enter Encrypted Text</h3>
+            <textarea class="text-input" placeholder="Paste your encrypted data here..."></textarea>
+            
+            <div class="upload-area">
+                <i class="fas fa-file-upload"></i>
+                <h3>Or Upload an Encrypted File</h3>
+                <p>Drag & drop files here or click to browse</p>
+                <input type="file" id="file-upload" style="display: none;">
+                <button class="btn" onclick="document.getElementById('file-upload').click()">
+                    <i class="fas fa-folder-open"></i> Select File
+                </button>
+            </div>
+        </div>
+        
+        <div class="options">
+            <h3><i class="fas fa-key"></i> Decryption Key</h3>
+            <input type="text" class="key-input" placeholder="Enter the encryption key/password used to encrypt this data">
+            
+            <h3><i class="fas fa-cog"></i> Encryption Method</h3>
+            <div class="radio-group">
+                <div class="radio-option">
+                    <input type="radio" id="aes" name="encryption" checked>
+                    <label for="aes">AES-256</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="rsa" name="encryption">
+                    <label for="rsa">RSA</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="blowfish" name="encryption">
+                    <label for="blowfish">Blowfish</label>
+                </div>
+                <div class="radio-option">
+                    <input type="radio" id="twofish" name="encryption">
+                    <label for="twofish">Twofish</label>
+                </div>
+            </div>
+        </div>
+        
+        <div class="action-btn">
+            <a href="hashing.html" class="btn">
+                <i class="fas fa-unlock"></i> Decrypt & Proceed to Hashing
+            </a>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-nav">
+                <a href="index.html">Home</a>
+                <a href="compression.html">Compression</a>
+                <a href="encryption.html">Encryption</a>
+                <a href="decryption.html">Decryption</a>
+                <a href="hashing.html">Hashing</a>
+                <a href="steganography.html">Steganography</a>
+            </div>
+            <div class="copyright">
+                &copy; 2023 Secure Data Processing System. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
